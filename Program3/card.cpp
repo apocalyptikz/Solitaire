@@ -51,7 +51,7 @@ card::card(size_t positionInDeck)
 
 card::card(std::string valueIn, std::string suitIn)
 {
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 12; ++i)
 	{
 		if (stringToLower(valueIn) == stringToLower(STDVALUESNAME[i]))
 		{
@@ -69,10 +69,10 @@ card::~card()
 
 }
 
-std::string card::longName()
+std::string card::longName()const
 {
 	std::string temp;
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 12; ++i)
 	{
 		if (_value == STDVALUEABBRV[i])
 		{
@@ -81,7 +81,7 @@ std::string card::longName()
 		}
 	}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; ++i)
 	{
 		if (_suit == STDSUITABBRV[i])
 		{
@@ -92,61 +92,71 @@ std::string card::longName()
 	return temp;
 }
 
-std::string card::shortName()
+std::string card::shortName()const
 {
-	return std::string();
+	std::string temp;
+	temp += _value;
+	temp += _suit;
+	return temp;
 }
 
-size_t card::position()
+int card::pointValue()const
 {
-	return size_t();
+	for (int i = 0; i < 12; ++i)
+		if (_value == STDVALUEABBRV[i])
+			return STDPOINTS[i];
 }
 
-int card::rank()
+int card::rank()const
 {
-	return 0;
+	for (int i = 0; i < 12; ++i)
+		if (_value == STDVALUEABBRV[i])
+			return STDPOINTS[i];
 }
 
-bool card::operator<(const card & cardIn)
+bool card::operator<(const card &cardIn)
 {
-	return false;
+	return (rank() < cardIn.rank());
 }
 
-bool card::operator>(const card & cardIn)
+bool card::operator>(const card &cardIn)
 {
-	return false;
+	return (rank() > cardIn.rank());
 }
 
-bool card::operator<=(const card & cardIn)
+bool card::operator<=(const card &cardIn)
 {
-	return false;
+	return (*this < cardIn || *this == cardIn);
 }
 
-bool card::operator>=(const card & cardIn)
+bool card::operator>=(const card &cardIn)
 {
-	return false;
+	return (*this > cardIn || *this == cardIn);
 }
 
-bool card::operator==(const card & cardIn)
+bool card::operator==(const card &cardIn)
 {
-	return false;
+	return (rank() == cardIn.rank());
 }
 
-bool card::operator!=(const card & cardIn)
+bool card::operator!=(const card &cardIn)
 {
-	return false;
+	return !(*this == cardIn);
 }
 
 card::operator int() const
 {
+	return rank();
 }
 
 card::operator double() const
 {
+	return pointValue() * 1.0;
 }
 
 card::operator std::string() const
 {
+	return longName();
 }
 
 std::string stringToLower(std::string upperString)

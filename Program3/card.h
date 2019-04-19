@@ -26,19 +26,19 @@
 class card
 {
 public:
-	card(const char valueIn = 'A', char suitIn = 'S');
-	card(const int valueIn = 3, const std::string suitIn = "ACE"); //3, "Ace"
-	card(const size_t positionInDeck = 39); //Position in sorted deck
-	card(const std::string valueIn = "Three", const std::string suitIn = "Diamonds"); //"Three", "Diamonds"
+	card(const char valueIn = 'A', char suitIn = 'C');
+	card(const int valueIn = 3, const std::string suitIn = "Ace");
+	card(const size_t positionInDeck = 39);
+	card(const std::string valueIn = "Ace", const std::string suitIn = "Clubs");
 	~card();
 	char getFaceValue()const { return _value; }
 	void setFaceValue(const char &faceIn) { _value = faceIn; }
 	char getSuit()const { return _suit; }
 	void setSuitValue(const char &suitIn) { _suit = suitIn; }
-	std::string longName();
-	std::string shortName();
-	size_t position();
-	int rank();
+	std::string longName()const;
+	std::string shortName()const;
+	int pointValue()const;
+	int rank()const;
 	bool operator<(const card& cardIn);
 	bool operator>(const card& cardIn);
 	bool operator<=(const card& cardIn);
