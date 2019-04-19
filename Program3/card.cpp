@@ -39,7 +39,7 @@ card::card(int valueIn, std::string suitIn)
 	//Value passed in will be 1 - 13
 	_value = STDVALUEABBRV[valueIn - 1];
 
-	//string at() returns a char
+	//get first char of suitIn
 	_suit = tolower(suitIn.at(0));
 }
 
@@ -51,7 +51,7 @@ card::card(size_t positionInDeck)
 
 card::card(std::string valueIn, std::string suitIn)
 {
-	for (size_t i = 0; i < 12; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		if (stringToLower(valueIn) == stringToLower(STDVALUESNAME[i]))
 		{
@@ -60,6 +60,7 @@ card::card(std::string valueIn, std::string suitIn)
 		}
 	}
 
+	//Just get first char for suit
 	_suit = tolower(suitIn.at(0));
 }
 
@@ -70,7 +71,25 @@ card::~card()
 
 std::string card::longName()
 {
-	return std::string();
+	std::string temp;
+	for (int i = 0; i < 12; i++)
+	{
+		if (_value == STDVALUEABBRV[i])
+		{
+			temp = STDVALUESNAME[i] + " of ";
+			break;
+		}
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (_suit == STDSUITABBRV[i])
+		{
+			temp += STDSUITNAME[i];
+			break;
+		}
+	}
+	return temp;
 }
 
 std::string card::shortName()
