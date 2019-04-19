@@ -31,10 +31,10 @@ public:
 	card(const size_t positionInDeck = 39); //Position in sorted deck
 	card(const std::string valueIn = "Three", const std::string suitIn = "Diamonds"); //"Three", "Diamonds"
 	~card();
-	char getFaceValue()const;
-	void setFaceValue(const char &faceIn);
-	char getSuit()const;
-	void setSuitValue(const char &suitIn);
+	char getFaceValue()const { return _value; }
+	void setFaceValue(const char &faceIn) { _value = faceIn; }
+	char getSuit()const { return _suit; }
+	void setSuitValue(const char &suitIn) { _suit = suitIn; }
 	std::string longName();
 	std::string shortName();
 	size_t position();
@@ -49,7 +49,8 @@ public:
 	operator double()const;
 	operator std::string()const;
 private:
-	int value;
-	char suit;
+	char _value;
+	char _suit;
 };
 
+std::string stringtolower(std::string);

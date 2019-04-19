@@ -29,48 +29,43 @@ const std::string STDSUITNAME[4] = { "Clubs", "Diamonds", "Heart", "Spades" };
 
 
 card::card(char valueIn, char suitIn)
-	: value((int)valueIn), suit(suitIn)
+	: _value(valueIn), _suit(suitIn)
 {
 
 }
 
 card::card(int valueIn, std::string suitIn)
-	:value(valueIn)
 {
-	char* temp = new char[1];
-	std::strcpy(temp, suitIn.c_str());
-	suit = temp;
+	//Value passed in will be 1 - 13
+	_value = STDVALUEABBRV[valueIn - 1];
 
+	//string at() returns a char
+	_suit = tolower(suitIn.at(0));
 }
 
 card::card(size_t positionInDeck)
 {
+	_value = STDVALUEABBRV[positionInDeck % 13];
+	_suit = STDSUITABBRV[(positionInDeck / 13)];
 }
 
 card::card(std::string valueIn, std::string suitIn)
 {
+	for (size_t i = 0; i < 12; i++)
+	{
+		if (stringToLower(valueIn) == stringToLower(STDVALUESNAME[i]))
+		{
+			_value = STDVALUEABBRV[i];
+			break;
+		}
+	}
+
+	_suit = tolower(suitIn.at(0));
 }
 
 card::~card()
 {
-}
 
-char card::getFaceValue() const
-{
-	return 0;
-}
-
-void card::setFaceValue(const char & faceIn)
-{
-}
-
-char card::getSuit() const
-{
-	return 0;
-}
-
-void card::setSuitValue(const char & suitIn)
-{
 }
 
 std::string card::longName()
@@ -133,4 +128,14 @@ card::operator double() const
 
 card::operator std::string() const
 {
+}
+
+std::string stringToLower(std::string upperString)
+{
+	std::string temp;
+	for (int i = 0; i < upperString.length() - 1; i++)
+	{
+		temp += tolower(upperString.at(i));
+	}
+	return temp;
 }
