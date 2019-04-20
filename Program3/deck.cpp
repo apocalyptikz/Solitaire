@@ -19,9 +19,57 @@
 
 deck::deck()
 {
+	for (size_t i = 0; i < 12; ++i)
+	{
+		for (size_t j = 0; j < 4; ++j)
+		{
+			//Contructs a card and inserts at back of _cards
+			_cards.emplace_back(card(card::STDVALUEABBRV[i], 
+				card::STDSUITABBRV[j]));
+		}
+	}
+}
+
+deck::deck(const deck &deckIn)
+{
+	_cards = deckIn._cards;
 }
 
 
 deck::~deck()
 {
+}
+
+void deck::add(const card &cardIn, bool top)
+{
+	if (top)
+		_cards.insert(_cards.begin(), cardIn);
+	else
+		_cards.push_back(cardIn);
+}
+
+int deck::insert(const size_t &index, const card &cardIn)
+{
+	if (&cardIn == NULL)
+		return EXIT_FAILURE;
+	_cards.insert(_cards.begin() + index, cardIn);
+	return (int)index;
+}
+
+void deck::remove(bool top)
+{
+	if (top)
+		_cards.erase(_cards.begin());
+	else
+		_cards.pop_back();
+}
+
+void deck::remove(const size_t &index)
+{
+	_cards.erase(_cards.begin() + index);
+}
+
+card& deck::getTopCard()
+{
+	return _cards.front();
 }

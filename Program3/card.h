@@ -48,9 +48,27 @@ public:
 	operator int()const;
 	operator double()const;
 	operator std::string()const;
+	const static size_t STDVALUES;
+	const static size_t STDSUITS;
+	const static size_t STDPOINTS[13];
+	const static size_t STDRANK[13];
+	const static char STDVALUEABBRV[13];
+	const static std::string STDVALUESNAME[13];
+	const static char STDSUITABBRV[4];
+	const static std::string STDSUITNAME[4];
 private:
 	char _value;
 	char _suit;
 };
 
+
 std::string stringtolower(std::string);
+std::string stringToLower(std::string upperString)
+{
+	std::string temp;
+	for (int i = 0; i < upperString.length() - 1; i++)
+	{
+		temp += tolower(upperString.at(i));
+	}
+	return temp;
+}

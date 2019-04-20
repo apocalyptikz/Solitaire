@@ -20,12 +20,12 @@
 //	double(based on card's point value)
 //	string(long card name)
 
-const size_t STDPOINTS[13] = { 14, 2, 3, 4 , 5, 6, 7 , 8, 9, 10, 11, 12, 13 };
-const size_t STDRANK[13] = { 12, 0, 1, 2 , 3, 4, 5 , 6, 7, 8, 9, 10, 11 };
-const char STDVALUEABBRV[13] = { 'A', '2', '3', '4' , '5', '6', '7' , '8', '9', 'T', 'J', 'Q', 'K' };
-const std::string STDVALUESNAME[13] = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
-const char STDSUITABBRV[4] = { 'C', 'D', 'H', 'S' };
-const std::string STDSUITNAME[4] = { "Clubs", "Diamonds", "Heart", "Spades" };
+const size_t card::STDPOINTS[13] = { 14, 2, 3, 4 , 5, 6, 7 , 8, 9, 10, 11, 12, 13 };
+const size_t card::STDRANK[13] = { 12, 0, 1, 2 , 3, 4, 5 , 6, 7, 8, 9, 10, 11 };
+const char card::STDVALUEABBRV[13] = { 'A', '2', '3', '4' , '5', '6', '7' , '8', '9', 'T', 'J', 'Q', 'K' };
+const std::string card::STDVALUESNAME[13] = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
+const char card::STDSUITABBRV[4] = { 'C', 'D', 'H', 'S' };
+const std::string card::STDSUITNAME[4] = { "Clubs", "Diamonds", "Heart", "Spades" };
 
 
 card::card(char valueIn, char suitIn)
@@ -51,7 +51,7 @@ card::card(size_t positionInDeck)
 
 card::card(std::string valueIn, std::string suitIn)
 {
-	for (int i = 0; i < 12; ++i)
+	for (size_t i = 0; i < 12; ++i)
 	{
 		if (stringToLower(valueIn) == stringToLower(STDVALUESNAME[i]))
 		{
@@ -72,7 +72,7 @@ card::~card()
 std::string card::longName()const
 {
 	std::string temp;
-	for (int i = 0; i < 12; ++i)
+	for (size_t i = 0; i < 12; ++i)
 	{
 		if (_value == STDVALUEABBRV[i])
 		{
@@ -81,7 +81,7 @@ std::string card::longName()const
 		}
 	}
 
-	for (int i = 0; i < 3; ++i)
+	for (size_t i = 0; i < 3; ++i)
 	{
 		if (_suit == STDSUITABBRV[i])
 		{
@@ -102,14 +102,14 @@ std::string card::shortName()const
 
 int card::pointValue()const
 {
-	for (int i = 0; i < 12; ++i)
+	for (size_t i = 0; i < 12; ++i)
 		if (_value == STDVALUEABBRV[i])
 			return STDPOINTS[i];
 }
 
 int card::rank()const
 {
-	for (int i = 0; i < 12; ++i)
+	for (size_t i = 0; i < 12; ++i)
 		if (_value == STDVALUEABBRV[i])
 			return STDPOINTS[i];
 }
@@ -157,14 +157,4 @@ card::operator double() const
 card::operator std::string() const
 {
 	return longName();
-}
-
-std::string stringToLower(std::string upperString)
-{
-	std::string temp;
-	for (int i = 0; i < upperString.length() - 1; i++)
-	{
-		temp += tolower(upperString.at(i));
-	}
-	return temp;
 }
