@@ -30,9 +30,13 @@ deck::deck()
 	}
 }
 
-deck::deck(const deck &deckIn)
+deck::deck(deck &deckIn)
 {
-	_cards = deckIn._cards;
+	while (!deckIn.isEmpty())
+	{
+		_cards.push_back(deckIn.getTopCard());
+		deckIn.remove(true);
+	}
 }
 
 
@@ -50,7 +54,7 @@ void deck::add(const card &cardIn, bool top)
 
 int deck::insert(const size_t &index, const card &cardIn)
 {
-	if (&cardIn == NULL)
+	if (&cardIn == NULL || index == -1)
 		return EXIT_FAILURE;
 	_cards.insert(_cards.begin() + index, cardIn);
 	return (int)index;
@@ -69,7 +73,35 @@ void deck::remove(const size_t &index)
 	_cards.erase(_cards.begin() + index);
 }
 
-card& deck::getTopCard()
+void deck::shuffle()
 {
-	return _cards.front();
+
+	std::random_shuffle(_cards.begin(), _cards.end());
+}
+
+deck& deck::operator+=(deck &deckIn)
+{
+	while (!deckIn.isEmpty())
+	{
+		_cards.push_back(deckIn.getTopCard());
+		deckIn.remove(true);
+	}
+	return *this;
+}
+
+deck& deck::operator+=(const card &cardIn)
+{
+	add(cardIn, false);
+	return *this;
+}
+
+deck& deck::operator=(deck &deckIn)
+{
+	_cards.clear();
+	while (!deckIn.isEmpty())
+	{
+		_cards.push_back(deckIn.getTopCard());
+		deckIn.remove(true);
+	}
+	return *this;
 }

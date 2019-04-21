@@ -1,6 +1,5 @@
 #pragma once
-#include <vector>
-#include "card.h"
+
 //deck objects should do the following :
 //
 //have a deep copy constructor
@@ -18,23 +17,28 @@
 //overload the sequence operator [] and const and non const
 //overload the += operator (for deck and card objects)
 
+#include <algorithm>
+#include <vector>
+#include "card.h"
+
 class deck
 {
 public:
 	deck();
-	deck(const deck &deckIn);
+	deck(deck &deckIn);
 	~deck();
 	void add(const card &cardIn, bool top = true);
 	int insert(const size_t &index = -1, const card &cardIn = NULL);
-	void remove(bool top = true);
-	void remove(const size_t &index);
-	card& getTopCard();
-	card& getBottomCard();
+	void remove(const bool top = true);
+	void remove(const size_t &index = -1);
+	card getTopCard()const { return _cards.front(); }
+	card getBottomCard()const { return _cards.back(); }
 	void clear() { _cards.clear(); }
 	void shuffle();
 	bool isEmpty()const { return _cards.empty(); }
-	deck& operator+=(const deck &deckIn);
-	deck& operator=(const deck &deckIn);
+	deck& operator+=(deck &deckIn);
+	deck& operator+=(const card &cardIn);
+	deck& operator=(deck &deckIn);
 	card operator[](int i)const { return _cards.at(i); }
 	card& operator[](int i) { return _cards.at(i); }
 
