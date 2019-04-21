@@ -17,6 +17,8 @@
 //overload the sequence operator [] and const and non const
 //overload the += operator (for deck and card objects)
 
+//Should _cards be private? iterating through _cards means removing the top card
+
 #include <algorithm>
 #include <vector>
 #include "card.h"
@@ -25,7 +27,7 @@ class deck
 {
 public:
 	deck();
-	deck(deck &deckIn);
+	deck(const deck &deckIn);
 	~deck();
 	void add(const card &cardIn, bool top = true);
 	int insert(const size_t &index = -1, const card &cardIn = NULL);
@@ -36,9 +38,9 @@ public:
 	void clear() { _cards.clear(); }
 	void shuffle();
 	bool isEmpty()const { return _cards.empty(); }
-	deck& operator+=(deck &deckIn);
+	deck& operator+=(const deck &deckIn);
 	deck& operator+=(const card &cardIn);
-	deck& operator=(deck &deckIn);
+	deck& operator=(const deck &deckIn);
 	card operator[](int i)const { return _cards.at(i); }
 	card& operator[](int i) { return _cards.at(i); }
 

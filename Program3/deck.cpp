@@ -30,12 +30,11 @@ deck::deck()
 	}
 }
 
-deck::deck(deck &deckIn)
+deck::deck(const deck &deckIn)
 {
-	while (!deckIn.isEmpty())
+	for (size_t i = 0; i < 53; ++i)
 	{
-		_cards.push_back(deckIn.getTopCard());
-		deckIn.remove(true);
+		_cards.push_back(deckIn[i]);
 	}
 }
 
@@ -79,12 +78,11 @@ void deck::shuffle()
 	std::random_shuffle(_cards.begin(), _cards.end());
 }
 
-deck& deck::operator+=(deck &deckIn)
+deck& deck::operator+=(const deck &deckIn)
 {
-	while (!deckIn.isEmpty())
+	for (size_t i = 0; i < 53; ++i)
 	{
-		_cards.push_back(deckIn.getTopCard());
-		deckIn.remove(true);
+		_cards.push_back(deckIn[i]);
 	}
 	return *this;
 }
@@ -95,13 +93,17 @@ deck& deck::operator+=(const card &cardIn)
 	return *this;
 }
 
-deck& deck::operator=(deck &deckIn)
+deck& deck::operator=(const deck &deckIn)
 {
-	_cards.clear();
-	while (!deckIn.isEmpty())
+	//Self assignment
+	if (this == &deckIn)
 	{
-		_cards.push_back(deckIn.getTopCard());
-		deckIn.remove(true);
+		return *this;
+	}
+	_cards.clear();
+	for (size_t i = 0; i < 53; ++i)
+	{
+		_cards.push_back(deckIn[i]);
 	}
 	return *this;
 }

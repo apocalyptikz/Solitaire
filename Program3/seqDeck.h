@@ -5,7 +5,7 @@
 //
 //inherit the deck class
 //remove the shuffle function
-//remove the reset function
+//remove the reset function (clear?)
 //remove the non-const reference seq operator function
 //default to an empty deck of cards
 //create a constructor to set sequence options
@@ -18,11 +18,11 @@
 //clear options(would clear options but not cards none/none/none)
 //override the += operator (seqDeck and card)
 #include "deck.h"
-class seqDeck :
-	public deck
+class seqDeck : public deck
 {
 public:
 	seqDeck();
 	~seqDeck();
+	void shuffle() = delete;
 };
 
