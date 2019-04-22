@@ -19,10 +19,55 @@
 //override the += operator (seqDeck and card)
 
 seqDeck::seqDeck()
+	:deck()
 {
+	deck::clear();
 }
 
+seqDeck::seqDeck(std::vector<std::string> options)
+{
+	_options.order = options[0];
+	_options.value = options[1];
+	_options.color = options[2];
+}
 
 seqDeck::~seqDeck()
 {
+}
+
+void seqDeck::clear()
+{
+	_options.order = "none";
+	_options.value = "none";
+	_options.color = "none";
+}
+
+void seqDeck::setOptions(const std::vector<std::string> options)
+{
+	_options.order = options[0];
+	_options.value = options[1];
+	_options.color = options[2];
+}
+
+void seqDeck::add(const card &cardIn)
+{
+	//Check top of this deck, cardIn must satisfy options
+	deck::add(cardIn, true);
+}
+
+int seqDeck::insert(const size_t &index, const card &cardIn)
+{
+	if (index == -1 || &cardIn == NULL)
+		return EXIT_FAILURE;
+
+}
+
+void seqDeck::remove(const bool top)
+{
+
+}
+
+void seqDeck::remove(const size_t &index)
+{
+
 }

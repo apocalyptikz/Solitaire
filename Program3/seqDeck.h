@@ -22,7 +22,26 @@ class seqDeck : public deck
 {
 public:
 	seqDeck();
+	seqDeck(std::vector<std::string> options);
 	~seqDeck();
 	void shuffle() = delete;
+	void clear();
+	void setOptions(const std::vector<std::string> options);
+	void add(const card &cardIn);
+	int insert(const size_t &index = -1, const card &cardIn = NULL);
+	void remove(const bool top = true);
+	void remove(const size_t &index = -1);
+	card& operator[](int i) = delete;
+private:
+	struct opt {
+		std::string order;
+		std::string value;
+		std::string color;
+		opt()
+			:order("none"),
+			value("none"),
+			color("none")
+		{}
+	} _options;
 };
 
