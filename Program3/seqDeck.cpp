@@ -19,16 +19,14 @@
 //override the += operator (seqDeck and card)
 
 seqDeck::seqDeck()
-	:deck()
 {
 	deck::clear();
 }
 
-seqDeck::seqDeck(std::vector<std::string> options)
+seqDeck::seqDeck(const std::string order, const std::string value, 
+	const std::string color)
 {
-	_options.order = options[0];
-	_options.value = options[1];
-	_options.color = options[2];
+	setOptions(order, value, color);
 }
 
 seqDeck::~seqDeck()
@@ -37,16 +35,17 @@ seqDeck::~seqDeck()
 
 void seqDeck::clear()
 {
-	_options.order = "none";
-	_options.value = "none";
-	_options.color = "none";
+	_options._order = "none";
+	_options._value = "none";
+	_options._color = "none";
 }
 
-void seqDeck::setOptions(const std::vector<std::string> options)
+void seqDeck::setOptions(const std::string order, const std::string value,
+	const std::string color)
 {
-	_options.order = options[0];
-	_options.value = options[1];
-	_options.color = options[2];
+	_options._order = order;
+	_options._value = value;
+	_options._color = color;
 }
 
 void seqDeck::add(const card &cardIn)
