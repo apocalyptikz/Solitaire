@@ -84,3 +84,62 @@
     <li>overload the += operator (seqDeck and card objects)</li>
 	<li>validate all update functions</li>
    </ul>
+   <pre>
+Foundation:
+XX XX XX XX    XX XX XX XX
+
+Piles:
+9D XX XX XX XX XX XX XX 4H
+   KS XX XX XX XX XX AC
+      2S XX XX XX QC
+         4H XX TD
+            8C
+			
+Stock: XX (79)
+
+From: p8
+To: f1
+**************************
+
+Foundation:
+AC XX XX XX    XX XX XX XX
+
+Piles:
+9D XX XX XX XX XX XX 3S 4H
+   KS XX XX XX XX XX 
+      2S XX XX XX QC
+         4H XX TD
+            8C
+			
+Stock: XX (79)
+
+From: stock   (a very bad decision!)
+**************************
+
+Foundation:
+AC XX XX XX    XX XX XX XX
+
+Piles:
+9D XX XX XX XX XX XX 3S 4H
+JS KS XX XX XX XX XX 7D 9S
+   6C 2S XX XX XX QC 
+      8C 4H XX TD AH
+         AH 8C 4H
+            TS
+			
+Stock: XX (70)
+
+From: 
+
+   </pre>
+   <li>Other:</li><pre>
+const size_t card::STDVALUES = 13;
+const size_t card::STDSUITS = 4;
+const size_t card::STDPOINTS[13] = { 14, 2, 3, 4 , 5, 6, 7 , 8, 9, 10, 11, 12, 13 };
+const size_t card::STDRANK[13] = { 12, 0, 1, 2 , 3, 4, 5 , 6, 7, 8, 9, 10, 11 };
+const char card::STDVALUEABBRV[13] = { 'A', '2', '3', '4' , '5', '6', '7' , '8', '9', 'T', 'J', 'Q', 'K' };
+const std::string card::STDVALUESNAME[13] = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"  };
+const char card::STDSUITABBRV[4] = {'C', 'D', 'H', 'S'};
+const std::string card::STDSUITNAME[4] = { "Clubs", "Diamonds", "Heart", "Spades" };
+</pre>
+
