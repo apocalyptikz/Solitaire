@@ -45,8 +45,8 @@ public:
 	bool operator>=(const card& cardIn);
 	bool operator==(const card& cardIn);
 	bool operator!=(const card& cardIn);
-	operator int()const;
-	operator double()const;
+	operator explicit int()const;
+	operator explicit double()const;
 	operator std::string()const;
 	const static size_t STDVALUES;
 	const static size_t STDSUITS;

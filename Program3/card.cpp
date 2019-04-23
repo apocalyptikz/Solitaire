@@ -144,12 +144,12 @@ bool card::operator!=(const card &cardIn)
 	return !(*this == cardIn);
 }
 
-card::operator int() const
+card::operator explicit int() const
 {
 	return rank();
 }
 
-card::operator double() const
+card::operator explicit double() const
 {
 	return pointValue() * 1.0;
 }

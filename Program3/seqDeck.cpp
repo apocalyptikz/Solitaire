@@ -50,7 +50,32 @@ void seqDeck::setOptions(const std::string order, const std::string value,
 
 void seqDeck::add(const card &cardIn)
 {
-	//Check top of this deck, cardIn must satisfy options
+	//All the cards are of equal rank?
+	if (_options._order == "constant")
+	{
+		if (getTopCard().rank() == cardIn.rank())
+			deck::add(cardIn, true);
+		else
+			return;
+	}
+
+	//Ascending (Piles): Front is lowest
+	else if (_options._order == "ascending")
+	{
+		if (getTopCard().rank() > cardIn.rank())
+		{
+
+		}
+	}
+
+	else if (_options._order == "descending")
+	{
+		if (getTopCard().rank() > cardIn.rank())
+		{
+
+		}
+	}
+
 	deck::add(cardIn, true);
 }
 
@@ -67,6 +92,11 @@ void seqDeck::remove(const bool top)
 }
 
 void seqDeck::remove(const size_t &index)
+{
+
+}
+
+struct opt& processMethod()
 {
 
 }
