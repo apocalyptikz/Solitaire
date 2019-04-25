@@ -32,7 +32,7 @@ deck::deck()
 
 deck::deck(const deck &deckIn)
 {
-	for (size_t i = 0; i < 53; ++i)
+	for (size_t i = 0; i < 51; ++i)
 	{
 		_cards.push_back(deckIn[i]);
 	}
