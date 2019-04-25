@@ -53,7 +53,7 @@ void seqDeck::add(const card &cardIn)
 	//All the cards are of equal rank?
 	if (_options._order == "constant")
 	{
-		if (getTopCard().rank() == cardIn.rank())
+		if (getTopCard() == cardIn)
 			deck::add(cardIn, true);
 		else
 			return;
@@ -62,7 +62,7 @@ void seqDeck::add(const card &cardIn)
 	//Ascending (Piles): Front is lowest
 	else if (_options._order == "ascending")
 	{
-		if (getTopCard().rank() > cardIn.rank())
+		if (getTopCard() > cardIn)
 		{
 
 		}
@@ -70,7 +70,7 @@ void seqDeck::add(const card &cardIn)
 
 	else if (_options._order == "descending")
 	{
-		if (getTopCard().rank() > cardIn.rank())
+		if (getTopCard() > cardIn)
 		{
 
 		}
