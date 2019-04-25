@@ -114,6 +114,11 @@ int card::rank()const
 			return STDPOINTS[i];
 }
 
+int card::operator-(const card &cardIn)
+{
+	return (rank() - cardIn.rank());
+}
+
 bool card::operator<(const card &cardIn)
 {
 	return (rank() < cardIn.rank());

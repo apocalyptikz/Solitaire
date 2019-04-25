@@ -39,14 +39,15 @@ public:
 	std::string shortName()const;
 	int pointValue()const;
 	int rank()const;
+	int operator-(const card& cardIn);
 	bool operator<(const card& cardIn);
 	bool operator>(const card& cardIn);
 	bool operator<=(const card& cardIn);
 	bool operator>=(const card& cardIn);
 	bool operator==(const card& cardIn);
 	bool operator!=(const card& cardIn);
-	operator explicit int()const;
-	operator explicit double()const;
+	explicit operator int()const;
+	explicit operator double()const;
 	operator std::string()const;
 	const static size_t STDVALUES;
 	const static size_t STDSUITS;
