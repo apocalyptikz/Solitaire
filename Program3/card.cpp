@@ -20,6 +20,9 @@
 //	double(based on card's point value)
 //	string(long card name)
 
+const static size_t STDCARDS = 52;
+const static size_t STDVALUES = 13;
+const static size_t STDSUITS = 4;
 const size_t card::STDPOINTS[13] = { 14, 2, 3, 4 , 5, 6, 7 , 8, 9, 10, 11, 12, 13 };
 const size_t card::STDRANK[13] = { 12, 0, 1, 2 , 3, 4, 5 , 6, 7, 8, 9, 10, 11 };
 const char card::STDVALUEABBRV[13] = { 'A', '2', '3', '4' , '5', '6', '7' , '8', '9', 'T', 'J', 'Q', 'K' };
@@ -45,13 +48,14 @@ card::card(int valueIn, std::string suitIn)
 
 card::card(size_t positionInDeck)
 {
-	_value = STDVALUEABBRV[positionInDeck % 13];
-	_suit = STDSUITABBRV[(positionInDeck / 13)];
+	_value = STDVALUEABBRV[positionInDeck % STDVALUES];
+	_suit = STDSUITABBRV[(positionInDeck / STDVALUES) % STDSUITS];
 }
 
 card::card(std::string valueIn, std::string suitIn)
 {
-	for (size_t i = 0; i < 12; ++i)
+	size_t i = 0;
+	for (size_t i = 0; i < STDVALUES - 1; ++i)
 	{
 		if (stringToLower(valueIn) == stringToLower(STDVALUESNAME[i]))
 		{
@@ -72,7 +76,7 @@ card::~card()
 std::string card::longName()const
 {
 	std::string temp;
-	for (size_t i = 0; i < 12; ++i)
+	for (size_t i = 0; i < STDVALUES - 1; ++i)
 	{
 		if (_value == STDVALUEABBRV[i])
 		{
@@ -81,7 +85,7 @@ std::string card::longName()const
 		}
 	}
 
-	for (size_t i = 0; i < 3; ++i)
+	for (size_t i = 0; i < STDSUITS - 1; ++i)
 	{
 		if (_suit == STDSUITABBRV[i])
 		{
@@ -102,16 +106,21 @@ std::string card::shortName()const
 
 int card::pointValue()const
 {
-	for (size_t i = 0; i < 12; ++i)
+	for (size_t i = 0; i < STDVALUES - 1; ++i)
 		if (_value == STDVALUEABBRV[i])
 			return STDPOINTS[i];
 }
 
 int card::rank()const
 {
-	for (size_t i = 0; i < 12; ++i)
+	for (size_t i = 0; i < STDVALUES - 1; ++i)
 		if (_value == STDVALUEABBRV[i])
 			return STDPOINTS[i];
+}
+
+int card::operator-(const card &cardIn)
+{
+	return (rank() - cardIn.rank());
 }
 
 bool card::operator<(const card &cardIn)
@@ -144,12 +153,12 @@ bool card::operator!=(const card &cardIn)
 	return !(*this == cardIn);
 }
 
-card::operator explicit int() const
+card::operator int() const
 {
 	return rank();
 }
 
-card::operator explicit double() const
+card::operator double() const
 {
 	return pointValue() * 1.0;
 }

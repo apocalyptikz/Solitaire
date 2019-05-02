@@ -19,9 +19,9 @@
 
 deck::deck()
 {
-	for (size_t i = 0; i < 12; ++i)
+	for (size_t i = 0; i < card::STDVALUES; ++i)
 	{
-		for (size_t j = 0; j < 4; ++j)
+		for (size_t j = 0; j < card::STDSUITS; ++j)
 		{
 			//Contructs a card and inserts at back of _cards
 			_cards.emplace_back(card(card::STDVALUEABBRV[i], 
@@ -32,7 +32,7 @@ deck::deck()
 
 deck::deck(const deck &deckIn)
 {
-	for (size_t i = 0; i < 51; ++i)
+	for (size_t i = 0; i < card::STDCARDS - 1; ++i)
 	{
 		_cards.push_back(deckIn[i]);
 	}
@@ -80,7 +80,7 @@ void deck::shuffle()
 
 deck& deck::operator+=(const deck &deckIn)
 {
-	for (size_t i = 0; i < 53; ++i)
+	for (size_t i = 0; i < card::STDCARDS - 1; ++i)
 	{
 		_cards.push_back(deckIn[i]);
 	}
@@ -101,7 +101,7 @@ deck& deck::operator=(const deck &deckIn)
 		return *this;
 	}
 	_cards.clear();
-	for (size_t i = 0; i < 53; ++i)
+	for (size_t i = 0; i < card::STDCARDS - 1; ++i)
 	{
 		_cards.push_back(deckIn[i]);
 	}
