@@ -59,15 +59,30 @@ void seqDeck::add(const card &cardIn)
 			return;
 	}
 
+	if (_options._value == "strict")
+	{
+
+	}
+
 	//Ascending (Piles): Front is lowest
 	else if (_options._order == "ascending")
 	{
 		if (getTopCard() > cardIn)
 		{
+			if (_options._value == "loose")
+				deck::add(cardIn, true);
+			else if (_options._value == "strict")
+			{
+				if ((getTopCard() - cardIn) == 1)
+				{
+					deck::add(cardIn, true);
+				}
 
+			}
 		}
 	}
 
+	//Foundation
 	else if (_options._order == "descending")
 	{
 		if (getTopCard() > cardIn)
@@ -79,9 +94,9 @@ void seqDeck::add(const card &cardIn)
 	deck::add(cardIn, true);
 }
 
-int seqDeck::insert(const size_t &index, const card &cardIn)
+int seqDeck::insert(const card &cardIn, const size_t &index)
 {
-	if (index == -1 || &cardIn == NULL)
+	if (index == -1)
 		return EXIT_FAILURE;
 
 }
