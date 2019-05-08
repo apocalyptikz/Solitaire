@@ -24,7 +24,7 @@ class seqDeck : public deck
 {
 public:
 	seqDeck();
-	seqDeck(int			);
+	seqDeck(int options);
 	~seqDeck();
 	void shuffle() = delete;
 	void clear();

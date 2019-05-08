@@ -18,15 +18,25 @@
 //clear options(would clear options but not cards none/none/none)
 //override the += operator (seqDeck and card)
 
+const int None = 0,
+		OrderAsc = 1,
+		OrderDesc = 2,
+		OrderConst = 4,
+		ValOrderNone = 8,
+		ValOrderLoose = 16,
+		ValOrderScrict = 32,
+		ColorOrderNone = 64,
+		ColorOrderSolid = 128,
+		ColorOrderAlt = 256;
+
 seqDeck::seqDeck()
 {
 	deck::clear();
 }
 
-seqDeck::seqDeck(const std::string order, const std::string value, 
-	const std::string color)
+seqDeck::seqDeck(int options)
 {
-	setOptions(order, value, color);
+	setOptions(options);
 }
 
 seqDeck::~seqDeck()
@@ -35,53 +45,50 @@ seqDeck::~seqDeck()
 
 void seqDeck::clear()
 {
-	_options._order = "none";
-	_options._value = "none";
-	_options._color = "none";
+	//Set options to none
 }
 
-void seqDeck::setOptions(const std::string order, const std::string value,
-	const std::string color)
+void seqDeck::setOptions(int options)
 {
-	_options._order = order;
-	_options._value = value;
-	_options._color = color;
+	//Toggle option
+	_options ^= options; 
 }
 
 void seqDeck::add(const card &cardIn)
 {
-	//All the cards are of equal rank?
-	if (_options._order == "constant")
+	//All the cards are of equal rank (same card)?
+	if ((_options & OrderConst) != 0)
 	{
 		if (getTopCard() == cardIn)
 			deck::add(cardIn, true);
 		else
 			return;
 	}
-
-	//Ascending (Piles): Front is lowest
-	else if (_options._order == "ascending")
+	//Piles ?
+	if ((_options & (OrderAsc | ValOrderLoose)) != 0)
 	{
-		if (getTopCard() > cardIn)
-		{
-
-		}
+		deck::add(cardIn, true);
+	}
+	//Piles
+	if ((_options & (OrderAsc | ValOrderScrict)) != 0)
+	{
+		if ((getTopCard() - cardIn) == 1)
+			deck::add(cardIn, true);
+	}
+	//Foundation
+	if ((_options & (OrderDesc | ValOrderScrict)) != 0)
+	{
+		if (abs(getTopCard() - cardIn) == 1)
+			deck::add(cardIn, true);
 	}
 
-	else if (_options._order == "descending")
-	{
-		if (getTopCard() > cardIn)
-		{
 
-		}
-	}
-
-	deck::add(cardIn, true);
+	
 }
 
-int seqDeck::insert(const size_t &index, const card &cardIn)
+int seqDeck::insert(const card &cardIn, const size_t &index)
 {
-	if (index == -1 || &cardIn == NULL)
+	if (index == -1)
 		return EXIT_FAILURE;
 
 }
