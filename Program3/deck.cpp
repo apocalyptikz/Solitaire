@@ -32,6 +32,7 @@ deck::deck()
 
 deck::deck(const deck &deckIn)
 {
+
 	for (size_t i = 0; i < card::STDCARDS - 1; ++i)
 	{
 		_cards.push_back(deckIn[i]);

@@ -20,6 +20,7 @@
 //	double(based on card's point value)
 //	string(long card name)
 
+
 const static size_t STDCARDS = 52;
 const static size_t STDVALUES = 13;
 const static size_t STDSUITS = 4;
@@ -54,7 +55,6 @@ card::card(size_t positionInDeck)
 
 card::card(std::string valueIn, std::string suitIn)
 {
-	size_t i = 0;
 	for (size_t i = 0; i < STDVALUES - 1; ++i)
 	{
 		if (stringToLower(valueIn) == stringToLower(STDVALUESNAME[i]))
@@ -85,6 +85,7 @@ std::string card::longName()const
 		}
 	}
 
+
 	for (size_t i = 0; i < STDSUITS - 1; ++i)
 	{
 		if (_suit == STDSUITABBRV[i])
@@ -106,13 +107,16 @@ std::string card::shortName()const
 
 int card::pointValue()const
 {
+
 	for (size_t i = 0; i < STDVALUES - 1; ++i)
+
 		if (_value == STDVALUEABBRV[i])
 			return STDPOINTS[i];
 }
 
 int card::rank()const
 {
+
 	for (size_t i = 0; i < STDVALUES - 1; ++i)
 		if (_value == STDVALUEABBRV[i])
 			return STDPOINTS[i];
