@@ -17,32 +17,25 @@
 //	color order(none / solid / alternate / color / suit)
 //clear options(would clear options but not cards none/none/none)
 //override the += operator (seqDeck and card)
+
+#include <bitset>
 #include "deck.h"
 class seqDeck : public deck
 {
 public:
 	seqDeck();
-	seqDeck(const std::string order = "none", const std::string value = "none",
-		const std::string color = "none");
+	seqDeck(int			);
 	~seqDeck();
 	void shuffle() = delete;
 	void clear();
-	void setOptions(const std::string order, const std::string value,
-		const std::string color);
+	void setOptions(int options);
 	void add(const card &cardIn);
-	int insert(const size_t &index = -1, const card &cardIn = NULL);
+	int insert(const card &cardIn, const size_t &index = -1);
 	void remove(const bool top = true);
 	void remove(const size_t &index = -1);
 	card& operator[](int i) = delete;
+	const card operator[](size_t i) { return deck::operator[](i); }
 private:
-	struct opt {
-		std::string _order;
-		std::string _value;
-		std::string _color;
-		opt() : 
-			_order("none"),
-			_value("none"),
-			_color("none") {}
-	} _options;
+	int _options;
 };
 
