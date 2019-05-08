@@ -41,7 +41,7 @@ public:
 	deck& operator+=(const deck &deckIn);
 	deck& operator+=(const card &cardIn);
 	deck& operator=(const deck &deckIn);
-	card operator[](int i)const { return _cards.at(i); }
+	const card operator[](int i)const { return _cards.at(i); }
 	card& operator[](int i) { return _cards.at(i); }
 
 private:

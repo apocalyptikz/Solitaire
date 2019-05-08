@@ -49,6 +49,7 @@ public:
 	explicit operator int()const;
 	explicit operator double()const;
 	operator std::string()const;
+	const static size_t STDCARDS;
 	const static size_t STDVALUES;
 	const static size_t STDSUITS;
 	const static size_t STDPOINTS[13];
