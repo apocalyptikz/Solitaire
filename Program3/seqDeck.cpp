@@ -84,26 +84,14 @@ void seqDeck::add(const card &cardIn)
 	deck::add(cardIn, true);
 }
 
+//Check both sides of insertion??
 int seqDeck::insert(const card &cardIn, const size_t &index)
 {
-	if ((_options & OrderConst) != 0)
-	{
-		
-	}
+	
 
 }
 
-void seqDeck::remove(const bool top)
+void seqDeck::remove()
 {
-
-}
-
-void seqDeck::remove(const size_t &index)
-{
-
-}
-
-struct opt& processMethod()
-{
-
+	deck::remove(true);
 }

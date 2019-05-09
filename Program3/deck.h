@@ -43,7 +43,6 @@ public:
 	deck& operator=(const deck &deckIn);
 	const card operator[](int i)const { return _cards.at(i); }
 	card& operator[](int i) { return _cards.at(i); }
-
 private:
 	std::vector<card> _cards;
 };

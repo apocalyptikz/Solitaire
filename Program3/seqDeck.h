@@ -31,8 +31,9 @@ public:
 	void setOptions(int options);
 	void add(const card &cardIn);
 	int insert(const card &cardIn, const size_t &index = -1);
-	void remove(const bool top = true);
-	void remove(const size_t &index = -1);
+	void remove();
+	void remove(const bool top = true) = delete;
+	void remove(const size_t &index = -1) = delete;
 	card& operator[](int i) = delete;
 	const card operator[](size_t i) { return deck::operator[](i); }
 private:

@@ -36,24 +36,62 @@ void sdPile::add(const seqDeck &deckIn, bool top, const size_t index)
 {
 	if (top)
 	{
-		_decks.insert(_decks.begin(), deckIn);
+		this->_decks.insert(_decks.begin(), deckIn);
 	}
 	else if (index != -1)
 	{
-		_decks.insert(_decks.begin() + index, deckIn);
+		this->_decks.insert(_decks.begin() + index, deckIn);
 	}
 	else
-		_decks.push_back(deckIn);
+		this->_decks.push_back(deckIn);
 }
 
-void sdPile::remove(const seqDeck &deckIn)
+//Remove top of pile (first element)
+seqDeck& sdPile::remove()
 {
-	_decks.erase(std::find(_decks.begin(), _decks.end(), deckIn));
+	if (_decks.size() != 0)
+	{
+		seqDeck temp = _decks.front();
+		this->_decks.erase(_decks.begin());
+		return temp;
+	}
+	
+
 }
 
-seqDeck& remove(const size_t &cards)
+seqDeck& sdPile::remove(const size_t & cards)
 {
+	if (_decks.size() != 0)
+	{
+		seqDeck temp;
+		size_t i = cards;
+		while (!_decks.front().isEmpty() && i > 0)
+		{
+			temp.add(_decks.front().getTopCard());
+			--i;
+		}
+		return temp;
+	}
+}
 
+sdPile& sdPile::operator=(const sdPile& pileIn)
+{
+	if (this != &pileIn && _decks.size() == 0)
+	{
+		this->_decks = pileIn._decks;
+	}
+}
+
+sdPile& sdPile::operator+=(const seqDeck & deckIn)
+{
+	this->add(deckIn);
+}
+
+sdPile& sdPile::operator+=(const card & cardIn)
+{
+	seqDeck temp;
+	temp.add(cardIn);
+	this->add(temp);
 }
 
 ////////////////////////////
