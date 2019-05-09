@@ -64,7 +64,7 @@ private:
 };
 
 
-std::string stringtolower(std::string);
+std::string stringTolower(std::string);
 std::string stringToLower(std::string upperString)
 {
 	std::string temp;

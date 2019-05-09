@@ -59,37 +59,37 @@ void seqDeck::add(const card &cardIn)
 	//All the cards are of equal rank (same card)?
 	if ((_options & OrderConst) != 0)
 	{
-		if (getTopCard() == cardIn)
-			deck::add(cardIn, true);
-		else
+		if (getTopCard() != cardIn)
 			return;
 	}
-	//Piles ?
-	if ((_options & (OrderAsc | ValOrderLoose)) != 0)
+	if ((_options & OrderAsc) != 0)
 	{
-		deck::add(cardIn, true);
+		if ((getTopCard() <= cardIn))
+			return;
 	}
-	//Piles
-	if ((_options & (OrderAsc | ValOrderScrict)) != 0)
+	if ((_options & ValOrderScrict) != 0)
 	{
-		if ((getTopCard() - cardIn) == 1)
-			deck::add(cardIn, true);
+		if ((getTopCard() - cardIn) != 1)
+			return;
 	}
-	//Foundation
-	if ((_options & (OrderDesc | ValOrderScrict)) != 0)
+	if ((_options & ColorOrderAlt) != 0)
 	{
-		if (abs(getTopCard() - cardIn) == 1)
-			deck::add(cardIn, true);
+		if (getTopCard().getSuit() == getTopCard().getSuit())
+			return;
 	}
+	if ((_options & ColorOrderSolid) != 0)
+		if (getTopCard().getSuit() != getTopCard().getSuit())
+			return;
 
-
-	
+	deck::add(cardIn, true);
 }
 
 int seqDeck::insert(const card &cardIn, const size_t &index)
 {
-	if (index == -1)
-		return EXIT_FAILURE;
+	if ((_options & OrderConst) != 0)
+	{
+		
+	}
 
 }
 
